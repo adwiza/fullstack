@@ -21,7 +21,7 @@ def generate_page(head, body):
     return page
 
 
-def save_page(title, header, paragraphs, output='html/index.html'):
+def save_page(title, header, paragraphs, output='index.html'):
     with open(output, 'w') as fp:
         page = generate_page(
 

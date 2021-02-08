@@ -1,0 +1,35 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital@1&display=swap');
+
+body {
+    background: purple;
+    color: white;
+}
+a {
+    color: grey;
+    text-decoration: none;
+}
+
+a:hover {
+	color: purple;
+	background: grey;
+}
+
+h1 {
+    color: red;
+    font-size: 42pt;
+    font-family: 'Merriweather', serif;
+
+}
+
+.indent {
+	margin-left: 33px;
+}
+
+.space-below {
+	margin-bottom: 70px;
+}
+
+#second-paragraph {
+	color: lightgreen;
+
+}
