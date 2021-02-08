@@ -1,5 +1,4 @@
 import random as r
-from pprint import pprint
 
 
 def generate_prophecies():
@@ -17,7 +16,3 @@ def generate_prophecies():
         generated_prophecies.append(time.capitalize() + ' ' + advices + ' ' + promises + '.')
         i += 1
     return generated_prophecies
-
-
-horoscope = generate_prophecies()
-pprint(horoscope)
