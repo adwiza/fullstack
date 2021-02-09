@@ -3,10 +3,9 @@ advice_url = "https://api.adviceslip.com/advice"
 $("#main-header").click(function() {
 
     $.getJSON(advice_url, function(data) {
-      	console.log(data);
+      	advice = data["slip"]["advice"]
+      	set_secret_message(advice);
     });
-
-    set_secret_message("Секретное послание");
 
 });
 
