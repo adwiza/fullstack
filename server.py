@@ -1,6 +1,7 @@
 from bottle import route, run, view
 from datetime import datetime
 from random import random
+from horoscope import generate_prophecies
 
 
 @route('/')
@@ -8,14 +9,10 @@ from random import random
 def index():
     now = datetime.now()
     special_day = random()
-
+    predictions = generate_prophecies() + generate_prophecies() + generate_prophecies()
     return {
         'date': f'0{now.day}-0{now.month}-{now.year}',
-        'predictions': [
-            'Днём ожидайте гостей из забытого прошлого.',
-            'Утром ожидайте встреч со старыми знакомыми.',
-            'Днём предостерегайтесь приятных перемен.',
-        ],
+        'predictions': predictions,
         'special_date': special_day > 0.5,
         'special_day': special_day,
     }
