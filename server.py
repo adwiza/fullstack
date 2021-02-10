@@ -9,7 +9,7 @@ from horoscope import generate_prophecies
 def index():
     now = datetime.now()
     special_day = random()
-    predictions = generate_prophecies() + generate_prophecies() + generate_prophecies()
+    predictions = generate_prophecies() + generate_prophecies()
     return {
         'date': f'0{now.day}-0{now.month}-{now.year}',
         'predictions': predictions,
@@ -18,10 +18,19 @@ def index():
     }
 
 
-@route('/api/test')
-def api_test():
+@route('/api/forecasts')
+def api_forecasts():
+    # now = datetime.now()
+
+    new_predictions = []
+    i = 0
+    while i < 6:
+        new_predictions += generate_prophecies()
+        i += 1
+
     return {
-        'test_passed': True
+        #  'date': f'0{now.day}-0{now.month}-{now.year}',
+        'predictions': new_predictions,
     }
 
 
