@@ -5,13 +5,13 @@ from horoscope import generate_prophecies
 
 
 @route('/')
-@view('predictions')
+@view('predictions2')
 def index():
     now = datetime.now()
     special_day = random()
     predictions = generate_prophecies() + generate_prophecies()
     return {
-        'date': f'0{now.day}-0{now.month}-{now.year}',
+        'date': f'{now.day}-0{now.month}-{now.year}',
         'predictions': predictions,
         'special_date': special_day > 0.5,
         'special_day': special_day,
@@ -20,17 +20,8 @@ def index():
 
 @route('/api/forecasts')
 def api_forecasts():
-    # now = datetime.now()
-
-    new_predictions = []
-    i = 0
-    while i < 6:
-        new_predictions += generate_prophecies()
-        i += 1
-
     return {
-        #  'date': f'0{now.day}-0{now.month}-{now.year}',
-        'predictions': new_predictions,
+        'predictions': generate_prophecies(),
     }
 
 
