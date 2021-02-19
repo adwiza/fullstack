@@ -15,6 +15,7 @@ for visit in visits:
     total_visits += int(visit)
 
 my_list = []
+
 for i in data.values:
     if i[1] == most_common_visitor[0][0]:
         my_list.append(i)
@@ -33,6 +34,6 @@ suspicious_agent = {
          },
 }
 
-with open('data/suspicious_agent.json', 'w') as outfile:
-    json.dump(suspicious_agent, outfile, indent=4)
+# with open('data/suspicious_agent.json', 'w') as outfile:
+#     json.dump(suspicious_agent, outfile, indent=4)
 print(json.dumps(suspicious_agent, indent=4))
