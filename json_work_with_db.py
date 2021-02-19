@@ -28,3 +28,5 @@ most_common_visitor = count.most_common(10)
 print('10 наиболее часто встречающихся адресов: ')
 for address in most_common_visitor:
     print(f'{address[0]: >55}'.format('right aligned'))
+
+print('Количество визитов c адреса 109.234.35.42:', most_common_visitor[0][1])
