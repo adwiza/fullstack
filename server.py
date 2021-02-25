@@ -5,7 +5,7 @@ from horoscope import generate_prophecies
 
 
 @route('/')
-@view('predictions2')
+@view('predictions')
 def index():
     now = datetime.now()
     special_day = random()
