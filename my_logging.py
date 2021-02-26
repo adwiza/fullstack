@@ -1,13 +1,7 @@
 import logging
 
-FORMATTER = logging.Formatter('%(asctime) %(levelname)s %(name)s - %(message)s')
+FORMATTER = logging.Formatter('%(asctime)s - %(levelname)s - %(name)s - %(message)s')
 LOG_FILE = 'my_app.log'
-
-logger = logging.getLogger('my-logger')
-handler = logging.StreamHandler()
-handler.setFormatter(FORMATTER)
-handler.setLevel(logging.DEBUG)
-logger.addHandler(handler)
 
 
 def get_console_handler():
