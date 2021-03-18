@@ -1,5 +1,6 @@
 import re
 
+# Check URL's
 # url_pg = 'postgres://admin:oocooSh7@postgres.host:5432/my_db'
 # url_sqlite = 'sqlite:///home/user/site_db.sqlite3'
 
