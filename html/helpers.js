@@ -15,3 +15,4 @@ function set_secret_message(msg) {
     p.html(msg)
     p.css("color", "red")
 }
+
