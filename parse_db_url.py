@@ -1,9 +1,8 @@
 import re
-from pprint import pprint
-
 
 # url_pg = 'postgres://admin:oocooSh7@postgres.host:5432/my_db'
 # url_sqlite = 'sqlite:///home/user/site_db.sqlite3'
+
 
 def parse_db_url(db_link='sqlite:///home/user/site_db.sqlite3'):
     """
@@ -40,10 +39,3 @@ def parse_db_url(db_link='sqlite:///home/user/site_db.sqlite3'):
         return sqlite_dict
     else:
         raise ValueError('Неизвестный тип БД')
-
-
-d = parse_db_url('postgres://admin:oocooSh7@postgres.host:5432/my_db')
-
-for k, v in d.items():
-
-    print(f'{k}: {v}')
