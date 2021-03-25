@@ -40,3 +40,6 @@ def parse_db_url(db_link='sqlite:///home/user/site_db.sqlite3'):
         return sqlite_dict
     else:
         raise ValueError('Неизвестный тип БД')
+
+
+print(parse_db_url("postgres://admin:oocooSh7@postgres.host:5432/my_db"))

@@ -14,3 +14,4 @@ class TodoItem(models.Model):
 
     class Meta:
         ordering = ('-created',)
+
