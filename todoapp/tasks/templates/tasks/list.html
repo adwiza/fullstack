@@ -13,19 +13,19 @@
     <div class="container">
         <h1>Текущие задачи</h1>
         <ul id="todo-list">
-            {% for task in tasks %}
-                {% if task.is_completed %}
-                <li class="completed">
-                    <input class="checkbox" data-uid={{ task.id }} type="checkbox" disabled="disabled" checked="checked"/>
-                {% else %}
-                <li>
-                    <input class="checkbox" data-uid={{ task.id }} type="checkbox" disabled="disabled" checked="checked"/>
-                {% endif %}
-                    {{ tasks }}
-                <a class="remove" href="/api/delete/{{ task.id }}">X</a>
-                <hr/>
-                </li>
-            {% endfor %}
+        {% for task in tasks %}
+            {% if task.is_completed %}
+            <li class="completed">
+                <input class='checkbox' data-uid={{ task.id }} type='checkbox' disabled='disabled' checked='checked' />
+            {% else %}
+            <li>
+                <input class="checkbox" data-uid={{ task.id }} type="checkbox" disabled="disabled" checked="checked" />
+            {% endif %}
+                {{ task }}
+            <a class='remove' href='/api/delete/{{ task.id }}'>X</a>
+            <hr/>
+            </li>
+        {% endfor %}
         </ul>
 
     </div>
