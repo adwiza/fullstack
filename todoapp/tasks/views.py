@@ -1,5 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+
+from tasks.forms import AddTaskForm
 from tasks.models import TodoItem
 
 # Create your views here.
@@ -28,7 +30,18 @@ def delete_task(request, uid):
 
 
 def task_create(request):
-    return render(request, 'tasks/create.html')
+    if request.method == 'POST':
+        form = AddTaskForm(request.POST)
+        if form.is_valid():
+            cd = form.cleaned_data
+            desc = cd['description']
+            t = TodoItem(description=desc)
+            t.save()
+            return redirect('/tasks/list')
+    else:
+        form = AddTaskForm()
+
+    return render(request, 'tasks/create.html', {'form': form})
 
 
 def tasks_list(request):
