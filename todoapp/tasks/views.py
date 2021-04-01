@@ -1,7 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
+from django.views import View
+from django.views.generic import ListView
 
-from tasks.forms import AddTaskForm
+from tasks.forms import AddTaskForm, TodoItemForm
 from tasks.models import TodoItem
 
 # Create your views here.
@@ -29,25 +31,24 @@ def delete_task(request, uid):
     return redirect('/tasks/list')
 
 
-def task_create(request):
-    if request.method == 'POST':
-        form = AddTaskForm(request.POST)
+class TaskListView(ListView):
+    queryset = TodoItem.objects.all()
+    context_object_name = 'tasks'
+    template_name = 'tasks/list.html'
+
+
+class TaskCreateView(View):
+    def my_render(self, request, form):
+        return render(request, 'tasks/create.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = TodoItemForm(request.POST)
         if form.is_valid():
-            cd = form.cleaned_data
-            desc = cd['description']
-            t = TodoItem(description=desc)
-            t.save()
+            form.save()
             return redirect('/tasks/list')
-    else:
-        form = AddTaskForm()
 
-    return render(request, 'tasks/create.html', {'form': form})
+        return self.my_render(request, form)
 
-
-def tasks_list(request):
-    all_tasks = TodoItem.objects.all()
-    return render(
-        request,
-        'tasks/list.html',
-        {'tasks': all_tasks}
-    )
+    def get(self, request, *args, **kwargs):
+        form = TodoItemForm()
+        return self.my_render(request, form)

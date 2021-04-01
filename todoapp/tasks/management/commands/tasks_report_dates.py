@@ -8,10 +8,12 @@ class Command(BaseCommand):
     help = u"Display not yet completed tasks' dates"
 
     def add_arguments(self, parser):
-        parser.add_argument('--warning-days', dest='warn_days', type=int, default=5)
+        parser.add_argument('--warning-days', dest='warn_days', type=int, default=3)
 
     def handle(self, *args, **options):
         now = datetime.now(timezone.utc)
         for t in TodoItem.objects.filter(is_completed=False):
             if (now - t.created).days >= options['warn_days']:
                 print('Старая задача:', t, t.created)
+
+
