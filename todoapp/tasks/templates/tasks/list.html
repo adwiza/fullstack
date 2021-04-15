@@ -1,4 +1,4 @@
-{% extends "tasks/base.html" %}
+{% extends "base.html" %}
 {% load static %}
 
 {% block title %}Задачи на день{% endblock %}
@@ -21,8 +21,8 @@
         <li>
         <input class='checkbox' data-uid={{ task.id }} type='checkbox' />
         {% endif %}
-            {{ task }}
-            <a class="remove" href="/tasks/delete/{{ task.id }}">X</a>
+            <a href="{% url 'tasks:details' task.id %}">{{ task }}</a>
+            <a class="remove" href="{% url 'tasks:delete' task.id %}">X</a>
             <hr/>
         </li>
     {% endfor %}

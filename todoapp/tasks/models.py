@@ -1,4 +1,6 @@
 from django.db import models
+from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 
@@ -8,9 +10,16 @@ class TodoItem(models.Model):
     is_completed = models.BooleanField('выполнено', default=False)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    owner = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='tasks')
 
     def __str__(self):
         return self.description.lower()
+
+    def get_absolute_url(self):
+        return reverse('tasks:details', args=[self.pk])
 
     class Meta:
         ordering = ('-created',)
