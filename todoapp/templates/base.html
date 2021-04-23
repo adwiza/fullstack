@@ -12,10 +12,30 @@
     </head>
     <body>
     <div class="container">
-        {% block main_content %}
-        {% endblock %}
+        <div class="row">
 
+            <div class="side_bar col">
+                {% block side_bar %}
+                    {% if user.is_authenticated %}
+                        <p>{{ user.first_name }}</p>
+                        <img src="{{ user.profile.avatar.url }}" class="img-fluid">
+
+                        <ul>
+                            <li><a href="#">профиль</a></li>
+                            <li><a href="{% 'tasks:create' %}">добавить задачу</a></li>
+                            <li><a href="{% 'tasks:list' %}">задачи</a></li>
+                            <li><a href="{% 'logout' %}">выйти</a></li>
+                        </ul>
+                    {% endif %}
+                {% endblock %}
+            </div>
+
+            <div class="main_content col-8">
+            {% block main_content %}
+            {% endblock %}
+            </div>
+
+        </div>
     </div>
-
     </body>
 </html>
