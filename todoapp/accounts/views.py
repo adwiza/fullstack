@@ -1,14 +1,18 @@
 import requests
+from django.core.mail import send_mail
+from django.conf import settings
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views import View
 
-from accounts.forms import LoginForm, RegistrationForm
-
+from accounts.forms import LoginForm, RegistrationForm, UserEditForm, ProfileEditForm
+from accounts.models import Profile
 
 # Create your views here.
-
+send_mail('Привет от Django', 'Письмо отправленное из приложения', 'adwiz@lidstore.ru',
+          ['adwiz@lidstore.ru'], fail_silently=False)
 
 class LoginView(View):
     def post(self, request, *args, **kwargs):
@@ -38,6 +42,7 @@ def register(request):
             new_user = form.save(commit=False)
             new_user.set_password(form.cleaned_data['password'])
             new_user.save()
+            Profile.objects.create(user=new_user)
 
             return render(request, 'accounts/registration_complete.html',
                           {'new_user': new_user})
@@ -45,3 +50,25 @@ def register(request):
         form = RegistrationForm()
 
     return render(request, 'accounts/register.html', {'user_form': form})
+
+
+@login_required
+def edit(request):
+    if request.method == 'POST':
+        user_form = UserEditForm(instance=request.user, data=request.POST)
+        profile_form = ProfileEditForm(
+            instance=request.user.profile, data=request.POST,
+            files=request.FILES
+        )
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+    else:
+        user_form = UserEditForm(instance=request.user)
+        profile_form = ProfileEditForm(instance=request.user.profile)
+
+    return render(
+        request,
+        'account/edit.html',
+        {'user_form': user_form, 'profile_form': profile_form},
+    )

@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
 
 
 from tasks.forms import AddTaskForm, TodoItemForm
@@ -37,7 +38,8 @@ def add_task(request):
 def delete_task(request, uid):
     t = TodoItem.objects.get(id=uid)
     t.delete()
-    return reverse('tasks:list')
+    messages.success(request, 'Задача удалена')
+    return redirect(reverse('tasks:list'))
 
 
 class TaskListView(LoginRequiredMixin, ListView):
